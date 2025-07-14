@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: light-bot
-    env: python
-    plan: free
-    buildCommand: ""
-    startCommand: "python bot.py"
