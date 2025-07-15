@@ -1,24 +1,21 @@
 import asyncio
-from telegram import Update
+from telegram import Bot
+from telegram.constants import ParseMode
 from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 
-# توکن رباتت:
 TOKEN = '7646820380:AAFA4hiH2plxRm_-uuQR_NJe-OYTYbEPIEc'
-# آیدی تلگرام پیتر:
 CHAT_ID = 1088069010
 
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("✅ ربات روشنه و روی Render اجرا میشه!")
+async def start_command(update, context):
+    await update.message.reply_text("✅ ربات روشن است!")
 
-async def notify_me(context: ContextTypes.DEFAULT_TYPE):
-    await context.bot.send_message(chat_id=CHAT_ID, text="🚀 رباتت به‌درستی روی Render بالا اومد.")
+async def send_message(context: ContextTypes.DEFAULT_TYPE):
+    await context.bot.send_message(chat_id=CHAT_ID, text="📡 بات با موفقیت اجرا شد", parse_mode=ParseMode.HTML)
 
 if __name__ == '__main__':
     app = ApplicationBuilder().token(TOKEN).build()
 
-    app.add_handler(CommandHandler("start", start))
-
-    # ارسال پیام تست هنگام شروع به پیتر
-    app.job_queue.run_once(notify_me, when=3)
+    app.add_handler(CommandHandler("start", start_command))
+    app.job_queue.run_once(send_message, when=3)
 
     app.run_polling()
