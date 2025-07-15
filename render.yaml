@@ -1,8 +1,6 @@
 services:
   - type: web
-    name: light-bot-peter
+    name: light-bot
     env: python
-    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python bot.py
-    autoDeploy: true
